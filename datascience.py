@@ -970,7 +970,7 @@ st.markdown("""
     width: 100%;
     padding: 10px 16px;
     border-radius: 12px;
-    background-color: #000000;
+    background-color:#FFFFFF;
     color: #ffffff;
     border: 1px solid #444;
     font-weight: 600;
