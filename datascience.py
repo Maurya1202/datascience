@@ -964,15 +964,44 @@ def delete_resource(resource_id):
 st.markdown("""
 <style>
 
-/* Force white text in buttons */
+/* Button base */
 div.stButton > button {
-    color: white !important;
+    width: 100%;
+    white-space: nowrap;
     font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 12px;
+
+    background-color: #0f172a;   /* dark bg */
+    color: white !important;     /* text always visible */
+
+    border: 1px solid #d1d5db;   /* IMPORTANT for light mode visibility */
 }
 
-/* Keep white on hover also */
+/* Hover */
 div.stButton > button:hover {
+    background-color: #1e293b;
     color: white !important;
+}
+
+/* Light theme fix */
+body[data-theme="light"] div.stButton > button {
+    background-color: #111827;
+    color: white !important;
+    border: 1px solid #9ca3af;   /* visible in white background */
+}
+
+/* Dark theme */
+body[data-theme="dark"] div.stButton > button {
+    background-color: #0f172a;
+    color: white !important;
+}
+
+/* Column alignment */
+[data-testid="column"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 </style>
