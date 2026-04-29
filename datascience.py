@@ -961,20 +961,35 @@ def delete_resource(resource_id):
         return False
 
 # --- CUSTOM CSS (ADD THIS FIRST) ---
+# --- CUSTOM CSS (ADD AT TOP) ---
 st.markdown("""
 <style>
 
-/* Black button with high-contrast text */
-div.stButton > button {
-    background-color: #000000 !important;
-    color: #FFFFFF !important;   /* BEST choice */
+/* ===== NAV BUTTON STYLE ===== */
+.job-btn {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background-color: #000000;
+    color: #ffffff;
     border: 1px solid #444;
     font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
 }
 
-div.stButton > button:hover {
-    background-color: #1a1a1a !important;
-    color: #FFFFFF !important;
+/* Hover */
+.job-btn:hover {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Align buttons properly */
+[data-testid="column"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 </style>
@@ -988,7 +1003,7 @@ current_page = query_params.get("page", "Home")
 # --- NAVIGATION BAR ---
 st.markdown('<div class="nav-bar">', unsafe_allow_html=True)
 
-# Adjusted layout (more space for controls)
+# Adjust layout
 col_logo, col_spacer, col_controls = st.columns([3, 4, 3])
 
 # --- LOGO ---
@@ -1006,16 +1021,15 @@ with col_spacer:
 
 # --- CONTROLS ---
 with col_controls:
-    # Give Job button more width
     subcol1, subcol2, subcol3 = st.columns([2, 1, 1])
     
-    # --- JOB SEARCH BUTTON ---
+    # --- JOB SEARCH (CUSTOM HTML BUTTON) ---
     with subcol1:
-        if st.button("Job Search", key="job_btn", help="Open Job Search"):
-            st.markdown(
-                '<meta http-equiv="refresh" content="0; url=https://www.google.com">',
-                unsafe_allow_html=True
-            )
+        st.markdown("""
+            <a href="https://www.google.com" target="_blank">
+                <button class="job-btn">Job Search</button>
+            </a>
+        """, unsafe_allow_html=True)
 
     # --- THEME TOGGLE ---
     with subcol2:
