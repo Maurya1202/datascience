@@ -1011,14 +1011,13 @@ with col_controls:
                 if st.button("🚪 Logout"):
                     st.session_state.is_admin = False
                     st.rerun()
-    with subcol2:   # Jobs button in middle
-    st.markdown(
-        '<a href="https://www.google.com" target="_blank" class="theme-toggle">💼 Jobs</a>',
-        unsafe_allow_html=True
-    )
+       # Jobs button in middle
+   
     
 
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown(
+        '<a href="https://www.google.com" target="_blank" class="theme-toggle">💼 Jobs</a>',
+        unsafe_allow_html=True
 
 # --- WRAPPED CONTENT ---
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
