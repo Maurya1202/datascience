@@ -965,20 +965,6 @@ query_params = st.query_params
 current_page = query_params.get("page", "Home")
 
 # --- NAVIGATION BAR (OUTSIDE MAIN CONTAINER) ---
-st.markdown('<div class="nav-bar">', unsafe_allow_html=True)
-col_logo, col_spacer, col_controls = st.columns([3, 5, 2])
-
-with col_logo:
-    st.markdown('''
-        <div style="position: relative;">
-            <div class="watermark">Avanish Maurya</div>
-            <a href="?page=Home" class="nav-logo">🎓 DataSci Hub</a>
-        </div>
-    ''', unsafe_allow_html=True)
-
-with col_spacer:
-    st.markdown('')  # Empty space
-
 with col_controls:
     subcol1, subcol2, subcol3 = st.columns(3)
     
@@ -989,8 +975,15 @@ with col_controls:
             st.session_state.dark_mode = not st.session_state.dark_mode
             st.rerun()
     
-    # Admin Login
+    # 💼 Jobs Button (ADD HERE)
     with subcol2:
+        st.markdown(
+            '<a href="https://www.google.com" target="_blank" class="theme-toggle">💼 Jobs</a>',
+            unsafe_allow_html=True
+        )
+    
+    # Admin Login
+    with subcol3:
         with st.popover("👤", help="Admin Access"):
             st.markdown("### 🔐 Admin Login")
             if "is_admin" not in st.session_state:
@@ -1011,13 +1004,6 @@ with col_controls:
                 if st.button("🚪 Logout"):
                     st.session_state.is_admin = False
                     st.rerun()
-       # Jobs button in middle
-   
-    
-
-st.markdown(
-        '<a href="https://www.google.com" target="_blank" class="theme-toggle">💼 Jobs</a>',
-        unsafe_allow_html=True
 
 # --- WRAPPED CONTENT ---
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
