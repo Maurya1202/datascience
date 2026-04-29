@@ -972,6 +972,10 @@ current_page = query_params.get("page", "Home")
 query_params = st.query_params
 current_page = query_params.get("page", "Home")
 
+# --- NAVIGATION ---
+query_params = st.query_params
+current_page = query_params.get("page", "Home")
+
 # --- NAVIGATION BAR (OUTSIDE MAIN CONTAINER) ---
 st.markdown('<div class="nav-bar">', unsafe_allow_html=True)
 col_logo, col_spacer, col_controls = st.columns([3, 5, 2])
@@ -985,20 +989,37 @@ with col_logo:
     ''', unsafe_allow_html=True)
 
 with col_spacer:
-    st.markdown('')  # Empty space
+    st.markdown('')
 
 with col_controls:
-    subcol1, subcol2, subcol3 = st.columns([1, 1, 1])
+    subcol1, subcol2, subcol3, subcol4 = st.columns([1, 1, 1, 1])
+    
+    # 🟠 Admin Button (NEW - LEFT)
+    with subcol1:
+        st.markdown("""
+            <div style="display:flex; align-items:center;">
+                <div style="
+                    background: linear-gradient(135deg, #ff8c00, #ff5e00);
+                    color: white;
+                    padding: 10px 16px;
+                    border-radius: 12px;
+                    font-weight: 600;
+                    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+                ">
+                    👤 Admin
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
     
     # Theme Toggle
-    with subcol1:
+    with subcol2:
         theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
         if st.button(theme_icon, key="theme_toggle", help="Toggle Dark/Light Mode"):
             st.session_state.dark_mode = not st.session_state.dark_mode
             st.rerun()
     
-    # Admin Login
-    with subcol2:
+    # Admin Login Popover
+    with subcol3:
         with st.popover("👤", help="Admin Access"):
             st.markdown("### 🔐 Admin Login")
             if "is_admin" not in st.session_state:
@@ -1020,8 +1041,8 @@ with col_controls:
                     st.session_state.is_admin = False
                     st.rerun()
 
-    # 💼 Jobs Button (FIXED UI)
-    with subcol3:
+    # 💼 Jobs Button (RIGHT)
+    with subcol4:
         st.markdown("""
             <div style="display:flex; justify-content:flex-end; align-items:center;">
                 <a href="https://www.google.com" target="_blank" 
