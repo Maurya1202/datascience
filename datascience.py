@@ -964,40 +964,41 @@ def delete_resource(resource_id):
 st.markdown("""
 <style>
 
-/* Button base */
+/* ===== DEFAULT BUTTON ===== */
 div.stButton > button {
     width: 100%;
     white-space: nowrap;
     font-weight: 600;
-    padding: 10px 14px;
+    padding: 10px 16px;
     border-radius: 12px;
-
-    background-color: #0f172a;   /* dark bg */
-    color: white !important;     /* text always visible */
-
-    border: 1px solid #d1d5db;   /* IMPORTANT for light mode visibility */
+    transition: all 0.3s ease;
 }
 
-/* Hover */
-div.stButton > button:hover {
-    background-color: #1e293b;
-    color: white !important;
-}
-
-/* Light theme fix */
-body[data-theme="light"] div.stButton > button {
-    background-color: #111827;
-    color: white !important;
-    border: 1px solid #9ca3af;   /* visible in white background */
-}
-
-/* Dark theme */
+/* ===== DARK THEME ===== */
 body[data-theme="dark"] div.stButton > button {
-    background-color: #0f172a;
-    color: white !important;
+    background-color: #111827;   /* dark */
+    color: #ffffff !important;
+    border: 1px solid #374151;
 }
 
-/* Column alignment */
+/* Hover (dark) */
+body[data-theme="dark"] div.stButton > button:hover {
+    background-color: #1f2937;
+}
+
+/* ===== LIGHT THEME ===== */
+body[data-theme="light"] div.stButton > button {
+    background-color: #ffffff;   /* white */
+    color: #111827 !important;   /* dark text */
+    border: 1px solid #d1d5db;
+}
+
+/* Hover (light) */
+body[data-theme="light"] div.stButton > button:hover {
+    background-color: #f3f4f6;
+}
+
+/* ===== ALIGNMENT FIX ===== */
 [data-testid="column"] {
     display: flex;
     justify-content: center;
