@@ -980,7 +980,7 @@ with col_spacer:
     st.markdown('')  # Empty space
 
 with col_controls:
-    subcol1, subcol2 = st.columns(2)
+    subcol1, subcol2, subcol3 = st.columns(3)
     
     # Theme Toggle
     with subcol1:
@@ -1011,6 +1011,12 @@ with col_controls:
                 if st.button("🚪 Logout"):
                     st.session_state.is_admin = False
                     st.rerun()
+    with subcol2:   # Jobs button in middle
+    st.markdown(
+        '<a href="https://www.google.com" target="_blank" class="theme-toggle">💼 Jobs</a>',
+        unsafe_allow_html=True
+    )
+    
 
 st.markdown('</div>', unsafe_allow_html=True)
 
