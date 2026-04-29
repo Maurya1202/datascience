@@ -984,7 +984,7 @@ with col_controls:
     
     # --- JOB SEARCH BUTTON ---
     with subcol1:
-        if st.button("💼", key="job_btn", help="Job Search"):
+        if st.button("Job Searh", key="job_btn", help="Job Search"):
             st.markdown(
                 '<meta http-equiv="refresh" content="0; url=https://www.google.com">',
                 unsafe_allow_html=True
