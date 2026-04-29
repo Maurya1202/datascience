@@ -982,9 +982,9 @@ with col_spacer:
 with col_controls:
     subcol1, subcol2, subcol3 = st.columns(3)
     
-    # --- JOB SEARCH BUTTON ---
+    # --- JOB SEARCH BUTTON (TEXT ONLY) ---
     with subcol1:
-        if st.button("Job Searh", key="job_btn", help="Job Search"):
+        if st.button("Job Search", key="job_btn", help="Open Job Search"):
             st.markdown(
                 '<meta http-equiv="refresh" content="0; url=https://www.google.com">',
                 unsafe_allow_html=True
