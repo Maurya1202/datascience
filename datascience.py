@@ -964,45 +964,17 @@ def delete_resource(resource_id):
 st.markdown("""
 <style>
 
-/* ===== DEFAULT BUTTON ===== */
+/* Black button with high-contrast text */
 div.stButton > button {
-    width: 100%;
-    white-space: nowrap;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;   /* BEST choice */
+    border: 1px solid #444;
     font-weight: 600;
-    padding: 10px 16px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
 }
 
-/* ===== DARK THEME ===== */
-body[data-theme="dark"] div.stButton > button {
-    background-color: #111827;   /* dark */
-    color: #ffffff !important;
-    border: 1px solid #374151;
-}
-
-/* Hover (dark) */
-body[data-theme="dark"] div.stButton > button:hover {
-    background-color: #1f2937;
-}
-
-/* ===== LIGHT THEME ===== */
-body[data-theme="light"] div.stButton > button {
-    background-color: #ffffff;   /* white */
-    color: #111827 !important;   /* dark text */
-    border: 1px solid #d1d5db;
-}
-
-/* Hover (light) */
-body[data-theme="light"] div.stButton > button:hover {
-    background-color: #f3f4f6;
-}
-
-/* ===== ALIGNMENT FIX ===== */
-[data-testid="column"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+div.stButton > button:hover {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
 }
 
 </style>
