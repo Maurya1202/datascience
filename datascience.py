@@ -960,14 +960,52 @@ def delete_resource(resource_id):
         st.error(f"Error deleting resource: {e}")
         return False
 
+# --- CUSTOM CSS (ADD THIS FIRST) ---
+st.markdown("""
+<style>
+
+/* General button styling */
+div.stButton > button {
+    width: 100%;
+    white-space: nowrap;   /* Prevent text breaking */
+    text-align: center;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background-color: #111827;
+    color: white;
+    border: none;
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+div.stButton > button:hover {
+    background-color: #374151;
+    color: white;
+}
+
+/* Center content inside columns */
+[data-testid="column"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
 # --- NAVIGATION ---
 query_params = st.query_params
 current_page = query_params.get("page", "Home")
 
-# --- NAVIGATION BAR (OUTSIDE MAIN CONTAINER) ---
+# --- NAVIGATION BAR ---
 st.markdown('<div class="nav-bar">', unsafe_allow_html=True)
-col_logo, col_spacer, col_controls = st.columns([3, 5, 2])
 
+# Adjusted layout (more space for controls)
+col_logo, col_spacer, col_controls = st.columns([3, 4, 3])
+
+# --- LOGO ---
 with col_logo:
     st.markdown('''
         <div style="position: relative;">
@@ -976,13 +1014,16 @@ with col_logo:
         </div>
     ''', unsafe_allow_html=True)
 
+# --- SPACER ---
 with col_spacer:
-    st.markdown('')  # Empty space
+    st.markdown('')
 
+# --- CONTROLS ---
 with col_controls:
-    subcol1, subcol2, subcol3 = st.columns(3)
+    # Give Job button more width
+    subcol1, subcol2, subcol3 = st.columns([2, 1, 1])
     
-    # --- JOB SEARCH BUTTON (TEXT ONLY) ---
+    # --- JOB SEARCH BUTTON ---
     with subcol1:
         if st.button("Job Search", key="job_btn", help="Open Job Search"):
             st.markdown(
@@ -992,23 +1033,27 @@ with col_controls:
 
     # --- THEME TOGGLE ---
     with subcol2:
+        if "dark_mode" not in st.session_state:
+            st.session_state.dark_mode = False
+
         theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
-        if st.button(theme_icon, key="theme_toggle", help="Toggle Dark/Light Mode"):
+        if st.button(theme_icon, key="theme_toggle", help="Toggle Theme"):
             st.session_state.dark_mode = not st.session_state.dark_mode
             st.rerun()
-    
+
     # --- ADMIN LOGIN ---
     with subcol3:
         with st.popover("👤", help="Admin Access"):
             st.markdown("### 🔐 Admin Login")
-            
+
             if "is_admin" not in st.session_state:
                 st.session_state.is_admin = False
-                
+
             if not st.session_state.is_admin:
                 with st.form("login"):
                     u = st.text_input("Username")
                     p = st.text_input("Password", type="password")
+
                     if st.form_submit_button("🚀 Login"):
                         if u == ADMIN_USER and p == ADMIN_PASS:
                             st.session_state.is_admin = True
