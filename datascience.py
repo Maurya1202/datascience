@@ -964,7 +964,7 @@ def delete_resource(resource_id):
 query_params = st.query_params
 current_page = query_params.get("page", "Home")
 
-# --- NAVIGATION BAR ---
+# --- NAVIGATION BAR (OUTSIDE MAIN CONTAINER) ---
 st.markdown('<div class="nav-bar">', unsafe_allow_html=True)
 col_logo, col_spacer, col_controls = st.columns([3, 5, 2])
 
@@ -977,61 +977,40 @@ with col_logo:
     ''', unsafe_allow_html=True)
 
 with col_spacer:
-    st.markdown('')
+    st.markdown('')  # Empty space
 
-# 🔥 FIXED CONTROLS (3 PERFECT BUTTONS)
 with col_controls:
-    subcol1, subcol2, subcol3 = st.columns(3)
-
-    # 🟠 Admin Button
+    subcol1, subcol2 = st.columns(2)
+    
+    # Theme Toggle
     with subcol1:
-        st.markdown("""
-            <div style="display:flex; justify-content:center;">
-                <div style="
-                    background: linear-gradient(135deg, #ff8c00, #ff5e00);
-                    color: white;
-                    width: 55px;
-                    height: 55px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    border-radius: 12px;
-                    font-size: 22px;
-                    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
-                ">
-                    👤
-                </div>
-            </div>
-        """, unsafe_allow_html=True)
-
-    # 🌙 Theme Toggle
-    with subcol2:
         theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
-        if st.button(theme_icon, key="theme_toggle", help="Toggle Theme"):
+        if st.button(theme_icon, key="theme_toggle", help="Toggle Dark/Light Mode"):
             st.session_state.dark_mode = not st.session_state.dark_mode
             st.rerun()
-
-    # 💼 Jobs Button
-    with subcol3:
-        st.markdown("""
-            <div style="display:flex; justify-content:center;">
-                <a href="https://www.google.com" target="_blank" style="
-                    background: #111827;
-                    color: white;
-                    width: 55px;
-                    height: 55px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    border-radius: 12px;
-                    font-size: 22px;
-                    text-decoration:none;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                ">
-                    💼
-                </a>
-            </div>
-        """, unsafe_allow_html=True)
+    
+    # Admin Login
+    with subcol2:
+        with st.popover("👤", help="Admin Access"):
+            st.markdown("### 🔐 Admin Login")
+            if "is_admin" not in st.session_state:
+                st.session_state.is_admin = False
+                
+            if not st.session_state.is_admin:
+                with st.form("login"):
+                    u = st.text_input("Username")
+                    p = st.text_input("Password", type="password")
+                    if st.form_submit_button("🚀 Login"):
+                        if u == ADMIN_USER and p == ADMIN_PASS:
+                            st.session_state.is_admin = True
+                            st.rerun()
+                        else:
+                            st.error("❌ Invalid credentials")
+            else:
+                st.success("✅ Logged In")
+                if st.button("🚪 Logout"):
+                    st.session_state.is_admin = False
+                    st.rerun()
 
 st.markdown('</div>', unsafe_allow_html=True)
 
