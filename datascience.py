@@ -980,19 +980,28 @@ with col_spacer:
     st.markdown('')  # Empty space
 
 with col_controls:
-    subcol1, subcol2 = st.columns(2)
+    subcol1, subcol2, subcol3 = st.columns(3)
     
-    # Theme Toggle
+    # --- JOB SEARCH BUTTON ---
     with subcol1:
+        if st.button("💼", key="job_btn", help="Job Search"):
+            st.markdown(
+                '<meta http-equiv="refresh" content="0; url=https://www.google.com">',
+                unsafe_allow_html=True
+            )
+
+    # --- THEME TOGGLE ---
+    with subcol2:
         theme_icon = "🌙" if not st.session_state.dark_mode else "☀️"
         if st.button(theme_icon, key="theme_toggle", help="Toggle Dark/Light Mode"):
             st.session_state.dark_mode = not st.session_state.dark_mode
             st.rerun()
     
-    # Admin Login
-    with subcol2:
+    # --- ADMIN LOGIN ---
+    with subcol3:
         with st.popover("👤", help="Admin Access"):
             st.markdown("### 🔐 Admin Login")
+            
             if "is_admin" not in st.session_state:
                 st.session_state.is_admin = False
                 
@@ -1013,7 +1022,6 @@ with col_controls:
                     st.rerun()
 
 st.markdown('</div>', unsafe_allow_html=True)
-
 # --- WRAPPED CONTENT ---
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
