@@ -968,6 +968,10 @@ current_page = query_params.get("page", "Home")
 query_params = st.query_params
 current_page = query_params.get("page", "Home")
 
+# --- NAVIGATION ---
+query_params = st.query_params
+current_page = query_params.get("page", "Home")
+
 # --- NAVIGATION BAR (OUTSIDE MAIN CONTAINER) ---
 st.markdown('<div class="nav-bar">', unsafe_allow_html=True)
 col_logo, col_spacer, col_controls = st.columns([3, 5, 2])
@@ -984,7 +988,7 @@ with col_spacer:
     st.markdown('')  # Empty space
 
 with col_controls:
-    subcol1, subcol2, subcol3 = st.columns(3)
+    subcol1, subcol2, subcol3 = st.columns([1, 1, 1])
     
     # Theme Toggle
     with subcol1:
@@ -1016,12 +1020,17 @@ with col_controls:
                     st.session_state.is_admin = False
                     st.rerun()
 
-    # 💼 Jobs Button (RIGHT SIDE)
+    # 💼 Jobs Button (FIXED UI)
     with subcol3:
-        st.markdown(
-            '<a href="https://www.google.com" target="_blank" class="theme-toggle">💼 Jobs</a>',
-            unsafe_allow_html=True
-        )
+        st.markdown("""
+            <div style="display:flex; justify-content:flex-end; align-items:center;">
+                <a href="https://www.google.com" target="_blank" 
+                   class="theme-toggle"
+                   style="text-decoration:none; display:inline-flex; padding:10px 16px;">
+                   💼 Jobs
+                </a>
+            </div>
+        """, unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
