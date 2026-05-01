@@ -1026,7 +1026,7 @@ with col_controls:
     # --- JOB SEARCH (CUSTOM HTML BUTTON) ---
     with subcol1:
         st.markdown("""
-            <a href="https://www.google.com" target="_blank">
+            <a href="https://github.com/Maurya1202/job" target="_blank">
                 <button class="job-btn">Job Search</button>
             </a>
         """, unsafe_allow_html=True)
